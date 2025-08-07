@@ -25,7 +25,6 @@
                     <li><a href="Carpooling.html">Home</a></li>
                     <li><a href="Carpooling.html#features">Features</a></li>
                     <li><a href="Carpooling.html#how-it-works">How It Works</a></li>
-                    <li><a href="Carpooling.html#testimonials">Testimonials</a></li>
                     <li><a href="Carpooling.html#contact">Contact</a></li>
                     <li><a href="SignUp.html" class="btn">Sign Up</a></li>
                 </ul>
@@ -124,8 +123,8 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="index.html#features">Features</a></li>
                         <li><a href="index.html#how-it-works">How It Works</a></li>
-                        <li><a href="index.html#testimonials">Testimonials</a></li>
                         <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="Profile.html">Profile</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -150,39 +149,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        function togglePassword() {
-            const password = document.getElementById('password');
-            const eyeIcon = document.querySelector('.toggle-password i');
-
-            if (password.type === 'password') {
-                password.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-            } else {
-                password.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-            }
-        }
-
-        document.getElementById('signupForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-
-            // Here you would typically send the form data to your server
-            alert('Account created successfully! Redirecting to dashboard...');
-            // window.location.href = 'dashboard.html';
-        });
-    </script>
 </body>
 
 </html>

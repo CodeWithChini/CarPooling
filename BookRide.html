@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Ride | RideX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="Style/Styles.css">
+    <style>
+        /* Additional styles for the book ride page */
+        .book-ride-hero {
+            background-color: var(--yellow);
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .book-ride-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .ride-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .ride-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ride-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .ride-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ride-details {
+            padding: 25px;
+        }
+
+        .ride-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .ride-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .ride-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        .ride-driver {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .driver-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .driver-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .driver-rating {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .book-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .book-btn:hover {
+            background-color: var(--secondary);
+        }
+
+        .filter-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .filter-title {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .no-rides {
+            text-align: center;
+            padding: 50px;
+            color: var(--text);
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .ride-options {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-options {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header--->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="./images/Logo.png" alt="RideX Logo">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="Carpooling.html">Home</a></li>
+                    <li><a href="Carpooling.html#features">Features</a></li>
+                    <li><a href="Carpooling.html#how-it-works">How It Works</a></li>
+                    <li><a href="Carpooling.html#contact">Contact</a></li>
+                    <li><a href="Profile.html">Profile</a></li>
+                    <li><a href="SignUp.html" class="btn">Sign Up</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="book-ride-hero">
+        <div class="book-ride-container">
+            <h1>Available Rides</h1>
+            <p>Choose from these available rides matching your route</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="book-ride-container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <h3 class="filter-title">Filter Rides</h3>
+            <div class="filter-options">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Today</button>
+                <button class="filter-btn">Tomorrow</button>
+                <button class="filter-btn">This Week</button>
+                <button class="filter-btn">Morning</button>
+                <button class="filter-btn">Afternoon</button>
+                <button class="filter-btn">Evening</button>
+                <button class="filter-btn">Female Only</button>
+                <button class="filter-btn">Verified Only</button>
+            </div>
+        </div>
+
+        <!-- Ride Options -->
+        <div class="ride-options">
+            <!-- Ride 1 -->
+            <div class="ride-card">
+                <div class="ride-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');">
+                </div>
+                <div class="ride-details">
+                    <div class="ride-header">
+                        <h3>Downtown to Airport</h3>
+                        <span class="ride-price">₹250</span>
+                    </div>
+                    <div class="ride-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Today, 8:30 AM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 seats available</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-car"></i>
+                            <span>Hyundai Creta, AC</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>45 min (25 km)</span>
+                        </div>
+                    </div>
+                    <div class="ride-driver">
+                        <div class="driver-avatar">RS</div>
+                        <div class="driver-info">
+                            <h4>Rahul Sharma</h4>
+                            <div class="driver-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                (42)
+                            </div>
+                        </div>
+                    </div>
+                    <button class="book-btn">Book This Ride</button>
+                </div>
+            </div>
+
+            <!-- Ride 2 -->
+            <div class="ride-card">
+                <div class="ride-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');">
+                </div>
+                <div class="ride-details">
+                    <div class="ride-header">
+                        <h3>City Center to Tech Park</h3>
+                        <span class="ride-price">₹180</span>
+                    </div>
+                    <div class="ride-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Tomorrow, 7:45 AM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>3 seats available</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-car"></i>
+                            <span>Maruti Suzuki Swift</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>35 min (18 km)</span>
+                        </div>
+                    </div>
+                    <div class="ride-driver">
+                        <div class="driver-avatar">PK</div>
+                        <div class="driver-info">
+                            <h4>Priya Khanna</h4>
+                            <div class="driver-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                (28)
+                            </div>
+                        </div>
+                    </div>
+                    <button class="book-btn">Book This Ride</button>
+                </div>
+            </div>
+
+            <!-- Ride 3 -->
+            <div class="ride-card">
+                <div class="ride-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');">
+                </div>
+                <div class="ride-details">
+                    <div class="ride-header">
+                        <h3>Suburb to Downtown</h3>
+                        <span class="ride-price">₹320</span>
+                    </div>
+                    <div class="ride-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Today, 5:15 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>1 seat available</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-car"></i>
+                            <span>Toyota Innova, AC</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>55 min (32 km)</span>
+                        </div>
+                    </div>
+                    <div class="ride-driver">
+                        <div class="driver-avatar">AM</div>
+                        <div class="driver-info">
+                            <h4>Arjun Mehta</h4>
+                            <div class="driver-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                (67)
+                            </div>
+                        </div>
+                    </div>
+                    <button class="book-btn">Book This Ride</button>
+                </div>
+            </div>
+
+            <!-- Ride 4 -->
+            <div class="ride-card">
+                <div class="ride-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');">
+                </div>
+                <div class="ride-details">
+                    <div class="ride-header">
+                        <h3>University to Mall</h3>
+                        <span class="ride-price">₹150</span>
+                    </div>
+                    <div class="ride-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Tomorrow, 2:00 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 seats available</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-car"></i>
+                            <span>Honda City, AC</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>25 min (12 km)</span>
+                        </div>
+                    </div>
+                    <div class="ride-driver">
+                        <div class="driver-avatar">NK</div>
+                        <div class="driver-info">
+                            <h4>Neha Kapoor</h4>
+                            <div class="driver-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                (53)
+                            </div>
+                        </div>
+                    </div>
+                    <button class="book-btn">Book This Ride</button>
+                </div>
+            </div>
+
+            <!-- Ride 5 -->
+            <div class="ride-card">
+                <div class="ride-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');">
+                </div>
+                <div class="ride-details">
+                    <div class="ride-header">
+                        <h3>Airport to Business District</h3>
+                        <span class="ride-price">₹400</span>
+                    </div>
+                    <div class="ride-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Today, 10:30 PM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>3 seats available</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-car"></i>
+                            <span>Mercedes-Benz, Luxury</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>40 min (30 km)</span>
+                        </div>
+                    </div>
+                    <div class="ride-driver">
+                        <div class="driver-avatar">VS</div>
+                        <div class="driver-info">
+                            <h4>Vikram Singh</h4>
+                            <div class="driver-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                (38)
+                            </div>
+                        </div>
+                    </div>
+                    <button class="book-btn">Book This Ride</button>
+                </div>
+            </div>
+
+            <!-- Ride 6 -->
+            <div class="ride-card">
+                <div class="ride-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');">
+                </div>
+                <div class="ride-details">
+                    <div class="ride-header">
+                        <h3>East End to West End</h3>
+                        <span class="ride-price">₹280</span>
+                    </div>
+                    <div class="ride-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Tomorrow, 8:00 AM</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>1 seat available</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-car"></i>
+                            <span>Tata Harrier</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>50 min (28 km)</span>
+                        </div>
+                    </div>
+                    <div class="ride-driver">
+                        <div class="driver-avatar">DP</div>
+                        <div class="driver-info">
+                            <h4>Deepak Patel</h4>
+                            <div class="driver-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                                (19)
+                            </div>
+                        </div>
+                    </div>
+                    <button class="book-btn">Book This Ride</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="./images/Logo.png" alt="RideX Logo">
+                    <p>Connecting people through shared journeys.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Safety Guidelines</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new features and offers.</p>
+                    <form>
+                        <input type="email" placeholder="Your Email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Carpool Service. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
